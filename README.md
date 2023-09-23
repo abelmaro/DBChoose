@@ -18,7 +18,7 @@ DBChoose is a .NET Core 7 project that allows you to switch between different da
 1. Clone the repository to your local machine.
 
 ```
-git clone https://github.com/your-username/DBChoose.git
+git clone https://github.com/abelmaro/DBChoose.git
 ```
 
 2. Navigate to the project directory.
