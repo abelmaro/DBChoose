@@ -1,0 +1,42 @@
+version: "3.4"
+
+networks: 
+    dbchoosenetwork:
+        driver: bridge
+
+services:
+    api:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        ports:
+          - "8080:80"
+        depends_on:
+          - sqldb
+          - postgresqldb 
+        environment:
+            DATABASE_PROVIDER: "postgresql"
+        networks:
+          - dbchoosenetwork
+
+    sqldb:
+        image: "mcr.microsoft.com/mssql/server:2022-latest"
+        ports:
+          - "1433:1433"
+
+        environment:
+            SA_PASSWORD: "1_dbchoosepass_9!"
+            ACCEPT_EULA: "Y"
+    
+    postgresqldb:
+        image: postgres:14.1-alpine
+        restart: always
+        environment:
+          POSTGRES_USER: "postgres"
+          POSTGRES_PASSWORD: "1_dbchoosepass_9!"
+          POSTGRES_DB: "DBChoose"
+        ports:
+          - '5432:5432'
+        networks:
+          - dbchoosenetwork
+          
